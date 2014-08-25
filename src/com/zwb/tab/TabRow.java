@@ -10,7 +10,18 @@ public class TabRow implements ITabRow
 
     public TabRow(String... cells)
     {
-        this.cells = Arrays.asList(cells);
+    	for(String c: cells)
+    	{
+    		if(c!=null)
+    		{
+    			this.cells.add(c);
+    		}
+    		else
+    		{
+    			this.cells.add("<null>");
+    		}
+    	}
+//        this.cells = Arrays.asList(cells);
     }
 
     public int getColCount()
