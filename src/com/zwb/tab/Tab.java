@@ -65,12 +65,22 @@ public class Tab
 
     public String printFormatted()
     {
+    	return print(true);
+    }
+
+    public String printHeadless()
+    {
+    	return print(false);
+    }
+
+    private String print(boolean printHeaders)
+    {
         List<Integer> lens = calculateCellSizes();
         int tot = calculateTotalTableSize(lens);
 
         String tab = "";
 
-        if ((this.tableTitle != null) && !this.tableTitle.isEmpty())
+        if (printHeaders && (this.tableTitle != null) && !this.tableTitle.isEmpty())
         {
             tab += createSeparatorString(tot) + "\n";
             tab += this.tableTitle + "\n";
@@ -83,10 +93,13 @@ public class Tab
             tab += this.tableComment + "\n";
         }
 
-        tab += createSeparatorString(tot) + "\n";
-        tab += this.headline.printFormatted(lens) + "\n";
-        tab += createSeparatorString(tot) + "\n";
-        int i = 0;
+        if(printHeaders)
+        {
+	        tab += createSeparatorString(tot) + "\n";
+	        tab += this.headline.printFormatted(lens) + "\n";
+	        tab += createSeparatorString(tot) + "\n";
+        }
+        
         for (ITabRow row : this.rows)
         {
         	if(row.isSeparator())
@@ -98,8 +111,12 @@ public class Tab
         		tab += row.printFormatted(lens) + "\n";
         	}
         }
-        tab += createSeparatorString(tot) + "\n";
-        tab += createSeparatorString(tot) + "\n";
+        
+        if(printHeaders)
+        {
+	        tab += createSeparatorString(tot) + "\n";
+	        tab += createSeparatorString(tot) + "\n";
+        }
         return tab;
     }
 
