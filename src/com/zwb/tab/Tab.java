@@ -29,6 +29,13 @@ public class Tab
         setHeadline(headline);
     }
 
+    public Tab(String title,
+            List<String> headline)
+{
+ setTableTitle(title);
+ setHeadline(headline);
+}
+
     public void setTableTitle(String title)
     {
         this.tableTitle = title;
@@ -54,11 +61,25 @@ public class Tab
         this.headline = new TabRow(headline);
     }
 
+    public void setHeadline(List<String> headline)
+    {
+        this.headline = new TabRow(headline);
+    }
+
     public void addRow(String... cells)
     {
         if (cells.length != getColCount())
         {
             throw new IllegalArgumentException("Col count doesn't match! Table has "+getColCount()+" cols, but tried to add row with "+cells.length+" cols!");
+        }
+        this.rows.add(new TabRow(cells));
+    }
+
+    public void addRow(List<String> cells)
+    {
+        if (cells.size() != getColCount())
+        {
+            throw new IllegalArgumentException("Col count doesn't match! Table has "+getColCount()+" cols, but tried to add row with "+cells.size()+" cols!");
         }
         this.rows.add(new TabRow(cells));
     }

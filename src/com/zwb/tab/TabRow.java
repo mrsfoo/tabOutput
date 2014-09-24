@@ -8,6 +8,22 @@ public class TabRow implements ITabRow
 {
     private List<String> cells = new ArrayList<String>();
 
+    public TabRow(List<String> cells)
+    {
+    	for(String c: cells)
+    	{
+    		if(c!=null)
+    		{
+    			this.cells.add(c);
+    		}
+    		else
+    		{
+    			this.cells.add("<null>");
+    		}
+    	}
+//        this.cells = Arrays.asList(cells);
+    }
+
     public TabRow(String... cells)
     {
     	for(String c: cells)
